@@ -4,22 +4,34 @@
 
 这套 Astro 模板适合想在首页讲清代表工作、同时保留完整论文列表的研究者。演示人物陆清禾（Qinghe Lu）是一位研究城市环境的虚构学者。人物、机构、论文和研究结果均为虚构，头像由 AI 生成，论文配图和相册插画为模板原创。
 
+## 用 AI 编程助手搭建主页
+
+把下面这段话发给能读取 GitHub 仓库、编辑文件的 AI 编程助手。如果手边有简历或论文列表，可以一起发给它。
+
+```text
+请用 https://github.com/tianyaooooo/academic-homepage-template 这个模板帮我搭建学术主页。
+在新项目里复制模板，保留四个页面的布局。告诉我需要提供哪些资料，再用我的资料替换虚构的示例内容。
+我还没有提供的内容先留空。把网站运行起来，给我一个可以直接打开的预览链接。
+```
+
+预览满意后，可以让助手按下方的发布说明，把主页部署到你自己的 GitHub Pages。
+
 ## 页面预览
 
-点击截图可以放大，点击页面名称可以打开对应的在线演示。
+点击截图可查看原图。
 
 <table>
   <tr>
     <td width="58%" valign="top">
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>首页</strong></a><br>
+      <p><strong>首页</strong><br>
       <a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="陆清禾的完整首页，从头像和研究兴趣，到动态、代表作、荣誉、联系信息和页脚。" width="100%"></a></p>
     </td>
     <td width="42%" valign="top">
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>论文</strong></a><br>
+      <p><strong>论文</strong><br>
       <a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="按年份排列的完整论文列表，顶部可按年份或会议筛选，第一篇 Rainline 的摘要已展开。" width="100%"></a></p>
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>经历</strong></a><br>
+      <p><strong>经历</strong><br>
       <a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="完整经历页，包含工作履历、研究与教学、学术服务和荣誉。" width="100%"></a></p>
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>杂项</strong></a><br>
+      <p><strong>杂项</strong><br>
       <a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="海岸漫步、随身速写和潮汐观察三个主题相册的封面。" width="100%"></a></p>
     </td>
   </tr>

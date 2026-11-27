@@ -4,22 +4,35 @@
 
 An Astro portfolio for researchers who want to feature a few papers on the homepage and keep a browsable bibliography alongside it. The demo follows Qinghe Lu (陆清禾), a fictional urban field scientist. Its people, institutions, publications, and results are fictional. The profile portrait is AI-generated, and the paper figures and album illustrations were made for this template.
 
+## Build your homepage with an AI coding agent
+
+Paste this prompt into a coding agent that can read GitHub repositories and edit files. If you have a CV or a publication list, attach it to the same message.
+
+```text
+Use https://github.com/tianyaooooo/academic-homepage-template as the template for my academic homepage.
+Make a copy in a new project and keep the four-page layout. Tell me what materials you need.
+Replace the fictional content with my details and leave anything I haven’t supplied blank.
+Run the site and give me a preview link so I can review it.
+```
+
+When you’re ready to publish, ask your agent to follow the GitHub Pages instructions below using your own repository.
+
 ## Page previews
 
-Click a screenshot to enlarge it, or a page name to open the live demo.
+Click a screenshot to view it at full size.
 
 <table>
   <tr>
     <td width="58%" valign="top">
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>Home</strong></a><br>
+      <p><strong>Home</strong><br>
       <a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="Qinghe Lu’s complete homepage, from her profile and research interests through selected papers, honors, and contact information." width="100%"></a></p>
     </td>
     <td width="42%" valign="top">
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>Publications</strong></a><br>
+      <p><strong>Publications</strong><br>
       <a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="The publication list from 2026 to 2024, with year and venue filters and the Rainline abstract expanded." width="100%"></a></p>
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>Experience</strong></a><br>
+      <p><strong>Experience</strong><br>
       <a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="Professional appointments, research and teaching, academic service, and honors." width="100%"></a></p>
-      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>Misc</strong></a><br>
+      <p><strong>Misc</strong><br>
       <a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="Three illustrated album covers for shore walks, sketchbooks, and tides." width="100%"></a></p>
     </td>
   </tr>
