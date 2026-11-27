@@ -24,7 +24,7 @@ Open [localhost:4321](http://localhost:4321). Start with your name, position, po
 | Content | File |
 | --- | --- |
 | Name, position, optional second name, navigation, demo footer | [site.config.ts](site.config.ts) |
-| Portrait and browser icon | [public/profile.png](public/profile.png) and [public/favicon.svg](public/favicon.svg) |
+| Portrait and browser icon | [src/assets/portraits/profile.png](src/assets/portraits/profile.png) and [public/favicon.svg](public/favicon.svg) |
 | Bio, contact details, news, featured paper summaries | [home.ts](src/data/home.ts) |
 | Research interest cards and paper links | [about.yml](src/data/about.yml) |
 | Papers, abstracts, corresponding authors | [publications.bib](src/data/publications.bib) |

@@ -6,7 +6,7 @@ import {
 	presetWind3,
 	transformerDirectives,
 } from 'unocss';
-import siteConfig from './src/side.config';
+import siteConfig from './site.config';
 
 // Dynamic icon names from editable data need to be available to UnoCSS at build time.
 const aboutIcons =

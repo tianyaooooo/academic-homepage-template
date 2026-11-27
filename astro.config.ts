@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/vite";
-import siteConfig from "./src/side.config";
+import siteConfig from "./site.config";
 import { withTrailingSlash } from "./src/lib/site-url";
 
 export default defineConfig({

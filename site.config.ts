@@ -8,7 +8,7 @@ export const siteConfig = defineSiteConfig({
   hero: {
     headline: "陆清禾",
     subheadline: "Field Scientist at Alder Bay Field Lab",
-    profileImage: "/profile.png",
+    profileImage: "/src/assets/portraits/profile.png",
     profileAlt: "Portrait of Qinghe Lu, the fictional researcher featured in this template",
     profileImageWidth: 480,
     profileImageHeight: 480,

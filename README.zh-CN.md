@@ -24,7 +24,7 @@ pnpm dev
 | 内容 | 编辑位置 |
 | --- | --- |
 | 姓名、职位、可选的第二种语言姓名、导航、页脚示例声明 | [site.config.ts](site.config.ts) |
-| 头像和网站图标 | [profile.png](public/profile.png)、[favicon.svg](public/favicon.svg) |
+| 头像和网站图标 | [profile.png](src/assets/portraits/profile.png)、[favicon.svg](public/favicon.svg) |
 | 简介、联系信息、动态和代表作介绍 | [home.ts](src/data/home.ts) |
 | 研究兴趣和对应论文 | [about.yml](src/data/about.yml) |
 | 论文、摘要和通讯作者 | [publications.bib](src/data/publications.bib) |
