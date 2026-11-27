@@ -2,9 +2,9 @@
 
 [在线演示](https://tianyaooooo.github.io/academic-homepage-template/) · [使用模板](https://github.com/tianyaooooo/academic-homepage-template/generate) · [English](README.md)
 
-这套 Astro 模板适合想在首页讲清代表工作、同时保留完整论文列表的研究者。演示人物 Casey Rowan 是一位研究城市环境的虚构学者。人物、机构、论文和研究结果均为虚构，插画为模板原创。
+这套 Astro 模板适合想在首页讲清代表工作、同时保留完整论文列表的研究者。演示人物陆清禾（Qinghe Lu）是一位研究城市环境的虚构学者。人物、机构、论文和研究结果均为虚构，头像由 AI 生成，论文配图和相册插画为模板原创。
 
-[![Casey Rowan 示例主页](docs/preview.png)](https://tianyaooooo.github.io/academic-homepage-template/)
+[![陆清禾的示例主页](docs/preview.png)](https://tianyaooooo.github.io/academic-homepage-template/)
 
 首页展示研究兴趣、图文代表作、荣誉和最近五条动态，较早的动态可展开。论文页可按年份或会议筛选、展开摘要、复制 BibTeX，并自动高亮作者本人。Experience 页展示工作、教学、学术服务和奖项；Misc 页按主题组织相册。
 

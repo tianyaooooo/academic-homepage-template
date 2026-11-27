@@ -1,15 +1,15 @@
 import { defineSiteConfig } from "./src/config/site";
 
 export const siteConfig = defineSiteConfig({
-  author: "Casey Rowan",
-  title: "Casey Rowan",
+  author: "Qinghe Lu",
+  title: "Qinghe Lu",
   siteUrl: process.env.SITE_URL || "http://localhost:4321",
-  description: "Casey Rowan studies how street design shapes heat, rainfall, and air quality.",
+  description: "Qinghe Lu studies how street design shapes heat, rainfall, and air quality.",
   hero: {
-    headline: "",
+    headline: "陆清禾",
     subheadline: "Field Scientist at Alder Bay Field Lab",
     profileImage: "/profile.png",
-    profileAlt: "Casey Rowan’s initials on a coastal contour map",
+    profileAlt: "Portrait of Qinghe Lu, the fictional researcher featured in this template",
     profileImageWidth: 480,
     profileImageHeight: 480,
   },

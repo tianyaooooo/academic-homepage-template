@@ -43,7 +43,7 @@ const selectedPublications: FeaturedPublication[] = [
 
 export const home = {
   background: "I study how heat and rain vary from one street to the next. I started out mapping drainage channels on foot. These days I pair field notebooks with sensors, especially in places where the nearest weather station misses what residents see on their own block.",
-  email: "casey@example.org",
+  email: "qinghe@example.org",
   selectedPublications,
   connect: {
     collaborations: "I welcome conversations with people tracing rain, heat, or other changes at street level. I especially enjoy comparing a puzzling sensor record with observations from someone who knows the site.",

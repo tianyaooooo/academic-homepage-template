@@ -169,9 +169,9 @@ describe("parseBibtex", () => {
 	});
 
 	test("shows an unpublished entry's review status from its ordinary BibTeX note", () => {
-		const [draft] = parseBibtex('@unpublished{d,title={Sketch},author={Rowan, Casey},note={Under review},listingyear=2025}');
+		const [draft] = parseBibtex('@unpublished{d,title={Sketch},author={Lu, Qinghe},note={Under review},listingyear=2025}');
 		expect(draft.venue).toBe("Under review");
-		expect(draft.authors).toEqual(["Casey Rowan"]);
+		expect(draft.authors).toEqual(["Qinghe Lu"]);
 		expect(draft.citation).toContain("note         = {Under review}");
 		expect(draft.citation).not.toMatch(/listingyear|2025|journal/);
 	});

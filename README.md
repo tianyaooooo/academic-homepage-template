@@ -2,9 +2,9 @@
 
 [Live demo](https://tianyaooooo.github.io/academic-homepage-template/) · [Use this template](https://github.com/tianyaooooo/academic-homepage-template/generate) · [简体中文](README.zh-CN.md)
 
-An Astro portfolio for researchers who want to feature a few papers on the homepage and keep a browsable bibliography alongside it. The demo follows Casey Rowan, a fictional urban field scientist. Its people, institutions, publications, and results are fictional. Its illustrations were made for this template.
+An Astro portfolio for researchers who want to feature a few papers on the homepage and keep a browsable bibliography alongside it. The demo follows Qinghe Lu (陆清禾), a fictional urban field scientist. Its people, institutions, publications, and results are fictional. The profile portrait is AI-generated, and the paper figures and album illustrations were made for this template.
 
-[![Homepage with Casey Rowan’s profile and research interests](docs/preview.png)](https://tianyaooooo.github.io/academic-homepage-template/)
+[![Homepage with Qinghe Lu’s profile and research interests](docs/preview.png)](https://tianyaooooo.github.io/academic-homepage-template/)
 
 **Home** pairs research interests with representative papers, shows five recent news items, and features illustrated research summaries. **Publications** supports year or venue filters, expandable abstracts, author highlighting, and copyable BibTeX. **Experience** groups appointments, teaching, service, and honors. **Misc** opens illustrated albums by theme. All four pages support mobile screens and dark mode.
 
