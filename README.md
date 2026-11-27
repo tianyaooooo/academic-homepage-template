@@ -19,24 +19,31 @@ When you’re ready to publish, ask your agent to follow the GitHub Pages instru
 
 ## Page previews
 
-Click a screenshot to view it at full size.
+Click a page name to expand or collapse its preview. Click a screenshot to view it at full size.
 
-<table>
-  <tr>
-    <td width="58%" valign="top">
-      <p><strong>Home</strong><br>
-      <a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="Qinghe Lu’s complete homepage, from her profile and research interests through selected papers, honors, and contact information." width="100%"></a></p>
-    </td>
-    <td width="42%" valign="top">
-      <p><strong>Publications</strong><br>
-      <a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="The publication list from 2026 to 2024, with year and venue filters and the Rainline abstract expanded." width="100%"></a></p>
-      <p><strong>Experience</strong><br>
-      <a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="Professional appointments, research and teaching, academic service, and honors." width="100%"></a></p>
-      <p><strong>Misc</strong><br>
-      <a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="Three illustrated album covers for shore walks, sketchbooks, and tides." width="100%"></a></p>
-    </td>
-  </tr>
-</table>
+<details open>
+  <summary><strong>Home</strong></summary>
+
+  <p><a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="Qinghe Lu’s complete homepage, from her profile and research interests through selected papers, honors, and contact information." width="100%"></a></p>
+</details>
+
+<details>
+  <summary><strong>Publications</strong></summary>
+
+  <p><a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="The publication list from 2026 to 2024, with year and venue filters and the Rainline abstract expanded." width="100%"></a></p>
+</details>
+
+<details>
+  <summary><strong>Experience</strong></summary>
+
+  <p><a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="Professional appointments, research and teaching, academic service, and honors." width="100%"></a></p>
+</details>
+
+<details>
+  <summary><strong>Misc</strong></summary>
+
+  <p><a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="Three illustrated album covers for shore walks, sketchbooks, and tides." width="100%"></a></p>
+</details>
 
 ## Start locally
 

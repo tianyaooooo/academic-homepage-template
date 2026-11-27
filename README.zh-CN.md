@@ -18,24 +18,31 @@
 
 ## 页面预览
 
-点击截图可查看原图。
+点击页名可展开或收起预览，点击截图可查看原图。
 
-<table>
-  <tr>
-    <td width="58%" valign="top">
-      <p><strong>首页</strong><br>
-      <a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="陆清禾的完整首页，从头像和研究兴趣，到动态、代表作、荣誉、联系信息和页脚。" width="100%"></a></p>
-    </td>
-    <td width="42%" valign="top">
-      <p><strong>论文</strong><br>
-      <a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="按年份排列的完整论文列表，顶部可按年份或会议筛选，第一篇 Rainline 的摘要已展开。" width="100%"></a></p>
-      <p><strong>经历</strong><br>
-      <a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="完整经历页，包含工作履历、研究与教学、学术服务和荣誉。" width="100%"></a></p>
-      <p><strong>杂项</strong><br>
-      <a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="海岸漫步、随身速写和潮汐观察三个主题相册的封面。" width="100%"></a></p>
-    </td>
-  </tr>
-</table>
+<details open>
+  <summary><strong>首页</strong></summary>
+
+  <p><a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="陆清禾的完整首页，从头像和研究兴趣，到动态、代表作、荣誉、联系信息和页脚。" width="100%"></a></p>
+</details>
+
+<details>
+  <summary><strong>论文</strong></summary>
+
+  <p><a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="按年份排列的完整论文列表，顶部可按年份或会议筛选，第一篇 Rainline 的摘要已展开。" width="100%"></a></p>
+</details>
+
+<details>
+  <summary><strong>经历</strong></summary>
+
+  <p><a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="完整经历页，包含工作履历、研究与教学、学术服务和荣誉。" width="100%"></a></p>
+</details>
+
+<details>
+  <summary><strong>杂项</strong></summary>
+
+  <p><a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="海岸漫步、随身速写和潮汐观察三个主题相册的封面。" width="100%"></a></p>
+</details>
 
 ## 本地运行
 
