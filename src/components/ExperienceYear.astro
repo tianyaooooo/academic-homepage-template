@@ -1,0 +1,9 @@
+---
+interface Props {
+  year: number;
+  ongoing?: boolean;
+}
+
+const { year, ongoing = false } = Astro.props;
+---
+<span class="year whitespace-nowrap text-[0.9em] font-normal text-ink-600 tabular-nums dark:text-paper-400">(<time datetime={String(year)}>{year}</time>{ongoing && "-present"})</span>

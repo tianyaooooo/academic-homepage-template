@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PublicationList from "../components/PublicationList.astro";
+import { getAllPapers, publicationVenueGroup, publicationVenues } from "../lib/papers";
+import siteConfig from "../side.config";
+import { publicationFigures } from "../data/publication-figures";
+
+const papers = getAllPapers();
+const papersByYear = new Map<string, typeof papers>();
+const venueCounts = new Map<string, number>();
+for (const paper of papers) {
+  const venue = publicationVenueGroup(paper.venue);
+  venueCounts.set(venue, (venueCounts.get(venue) ?? 0) + 1);
+  const year = String(paper.listingYear ?? paper.year ?? "Undated");
+  const group = papersByYear.get(year);
+  if (group) group.push(paper);
+  else papersByYear.set(year, [paper]);
+}
+const yearGroups = Array.from(papersByYear, ([year, entries]) => ({
+  year, entries, id: `year-${year.toLowerCase()}`,
+}));
+const filterRows = [
+  {
+    axis: "year",
+    label: "Filter by year",
+    buttons: [
+      { key: "all", label: "All", count: papers.length },
+      ...yearGroups.map(({ year, id, entries }) => ({ key: id, label: year, count: entries.length })),
+    ],
+  },
+  {
+    axis: "venue",
+    label: "Filter by venue or review status",
+    buttons: [
+      { key: "all", label: "All", count: papers.length },
+      ...publicationVenues
+        .map(({ key, label }) => ({ key, label, count: venueCounts.get(key) ?? 0 }))
+        .filter(button => button.count > 0),
+    ],
+  },
+];
+const pageTitle = siteConfig.pageTitles.researches.title || "Publications";
+const pageDescription = siteConfig.pageTitles.researches.description;
+---
+
+<Layout title={pageTitle} description={pageDescription} schemaType="CollectionPage">
+  <div class="page-stack">
+    <header class="page-header">
+      <h1 class="page-title">{pageTitle}</h1>
+      {pageDescription && <p class="page-description">{pageDescription}</p>}
+      {papers.length > 0 && (
+        <div data-publication-filters class="grid w-fit max-w-full gap-3">
+          {filterRows.map(row => (
+            <div class="facet-row filter-bar min-w-0 rounded-xl border border-paper-300/80 bg-paper-100/60 dark:border-ink-700/80 dark:bg-ink-900/50" role="group" aria-label={row.label}>
+              {row.buttons.map(({ key, label, count }) => (
+                <button
+                  type="button"
+                  value={key}
+                  data-filter-param={row.axis === "year" ? "filter" : row.axis}
+                  class="filter-btn inline-flex min-h-10 shrink-0 cursor-pointer items-center gap-1.5 whitespace-nowrap px-2.5 text-sm font-semibold text-ink-700 dark:text-paper-300 sm:px-3"
+                  data-filter={row.axis === "year" ? key : undefined}
+                  data-venue-filter={row.axis === "venue" ? key : undefined}
+                  data-active={String(row.axis === "year" && key === "all")}
+                  aria-pressed={row.axis === "year" && key === "all" ? "true" : "false"}
+                  aria-controls="papers-container"
+                  title={key === "all" ? "Show all publications" : undefined}
+                >
+                  {(key === "all" || row.axis === "year") && <span aria-hidden="true" class={key === "all" ? "i-mdi:file-document-multiple" : "i-mdi:calendar"}></span>}
+                  <span data-filter-label>{label}</span>
+                  <span data-filter-count class="font-mono text-xs font-normal tabular-nums">{count}</span>
+                </button>
+              ))}
+            </div>
+          ))}
+          <p class="sr-only" aria-live="polite" data-filter-status></p>
+        </div>
+      )}
+    </header>
+    <div class="space-y-6 sm:space-y-7" id="papers-container" data-publication-total={papers.length}>
+      {papers.length > 0 && <p class="body-copy" data-publication-empty hidden>No publications match these filters.</p>}
+      {papers.length === 0 && <p data-empty-publications class="body-copy">No publications to display yet.</p>}
+      {yearGroups.map(({ year, entries, id }) => (
+        <section
+          id={id}
+          aria-labelledby={`${id}-heading`}
+          class="paper-section scroll-mt-20 space-y-4"
+          data-filter-section={id}
+        >
+          <header class="border-b border-paper-300/90 pb-3 dark:border-ink-700">
+            <h2 id={`${id}-heading`} class="section-heading">{year}</h2>
+          </header>
+          <PublicationList papers={entries} figures={publicationFigures} />
+        </section>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { setupPublicationFilters } from "../scripts/publication-filters";
+  document.addEventListener("astro:page-load", () => setupPublicationFilters());
+</script>
+
+<style>
+  .facet-row {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    overflow-x: auto;
+    padding: 0.3rem;
+    scrollbar-width: thin;
+  }
+  .facet-row [data-filter-count] { opacity: 0.8; }
+  .facet-row button:focus-visible { outline-offset: -2px; }
+</style>

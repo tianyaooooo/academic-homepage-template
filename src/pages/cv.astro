@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ExperienceYear from "../components/ExperienceYear.astro";
+import InlineText from "../components/InlineText.astro";
+import { experience } from "../data/experience";
+import { honors } from "../data/honors";
+import siteConfig from "../side.config";
+
+const { professional, academic, teaching, service } = experience;
+---
+
+<Layout title="Experience & Honors" description={`Professional experience, research, teaching, service, and honors of ${siteConfig.author}.`} schemaType="ProfilePage" showCopyrightYear={false}>
+  <div class="page-stack cv text-ink-800 dark:text-paper-200">
+    <header class="page-header">
+      <h1 class="page-title">Experience &amp; Honors</h1>
+    </header>
+
+    {professional.length > 0 && (
+      <section aria-labelledby="experience">
+        <h2 id="experience" class="section-heading">Professional Experience</h2>
+        <ul class="entries">
+          {professional.map(({ role, organization, details, year, ongoing }) => (
+            <li>
+              <strong>{role}, {organization}</strong>{" "}{year !== undefined && <ExperienceYear year={year} ongoing={ongoing} />}
+              {details && <p><InlineText parts={details} /></p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {(academic.length > 0 || teaching.length > 0) && (
+      <section aria-labelledby="academic-experience">
+        <h2 id="academic-experience" class="section-heading">Research &amp; Teaching</h2>
+        <div class="academic-roles">
+          {academic.map(({ role, organization, details, year, ongoing }) => (
+            <div>
+              <h3>{role}, {organization}{" "}{year !== undefined && <ExperienceYear year={year} ongoing={ongoing} />}</h3>
+              {details && <p><InlineText parts={details} /></p>}
+            </div>
+          ))}
+          {teaching.map(({ role, institution, courses }, index) => (
+            <div id={index === 0 ? "teaching" : undefined}>
+              <h3>{role}, {institution}</h3>
+              <ul class="course-list">
+                {courses.map(({ title, year }) => (
+                  <li>{title}{" "}{year !== undefined && <ExperienceYear year={year} />}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {service.length > 0 && (
+      <section aria-labelledby="academic-service">
+        <h2 id="academic-service" class="section-heading">Academic Service</h2>
+        <ul class="entries">
+          {service.map(({ role, organization, year }) => (
+            <li>{role}, {organization}{" "}{year !== undefined && <ExperienceYear year={year} />}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {honors.length > 0 && (
+      <section aria-labelledby="honors-awards">
+        <h2 id="honors-awards" class="section-heading">Honors &amp; Awards</h2>
+        <ul class="list-disc space-y-1.5 pl-5 marker:text-accent-600 dark:marker:text-accent-300">
+          {honors.map(award => (
+            <li>
+              {award.name}{award.note && <span lang={award.noteLang}> ({award.note})</span>}
+              {award.year !== undefined && <>{" "}<ExperienceYear year={award.year} /></>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .cv section { line-height: 1.55; }
+  .cv h2 {
+    margin-bottom: 1.05rem;
+    padding-bottom: .55rem;
+    border-bottom: 1px solid var(--glass-control-border);
+    scroll-margin-top: 6rem;
+  }
+  .entries, .course-list { list-style: none; padding: 0; margin: 0; }
+  .entries { display: grid; gap: .85rem; }
+  .entries p { margin: .08rem 0 0; }
+  .academic-roles { display: grid; gap: 1.25rem; }
+  .academic-roles h3 { font-size: 1rem; font-weight: 600; margin: 0 0 .4rem; }
+  #teaching { scroll-margin-top: 6rem; }
+  .course-list { display: grid; gap: .3rem; }
+  @media (max-width: 38rem) {
+    .course-list { gap: .65rem; }
+  }
+</style>

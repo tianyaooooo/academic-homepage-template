@@ -1,0 +1,18 @@
+---
+interface Props {
+  parts: string | readonly (string | { text: string; href: string } | { strong: string })[];
+}
+
+const { parts } = Astro.props;
+const segments = typeof parts === "string" ? [parts] : parts;
+---
+{segments.map((part) => {
+  if (typeof part === "string") return part;
+  if ("strong" in part) return <strong class="font-bold">{part.strong}</strong>;
+  return <a href={part.href} class="text-accent-700 dark:text-accent-300">{part.text}</a>;
+})}
+
+<style>
+  a { text-decoration: underline; text-underline-offset: 0.19em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+</style>

@@ -1,0 +1,44 @@
+% Fictional sample bibliography. Keys are also page anchors, e.g. #rainline.
+% venue is an optional short badge. journal and booktitle retain their usual BibTeX meanings.
+@inproceedings{rainline,
+  title = {{Rainline}: Reading Street Flooding from Sparse Water-Level Sensors},
+  author = {Rowan, Casey and Alder, Robin},
+  venue = {FS},
+  booktitle = {Field Signals},
+  year = {2026},
+  pages = {41--50},
+  citationkey = {rowan2026rainline},
+  abstract = {A single water-level sensor can tell when a street floods, but it cannot tell how far the water extends. Rainline compares the time of a rain shower with peaks at pairs of upstream and downstream gauges. It reports the street segments supported by the observations and leaves the gaps between them unresolved. In simulated storms, this distinction exposes cases where a brief puddle might otherwise be mapped as a flooded route.},
+  public = {yes}
+}
+
+@unpublished{driftmap,
+  title = {{DriftMap}: Separating Sensor Drift from Neighborhood Change},
+  author = {Brook, Ellis and Rowan, Casey},
+  starredauthor = {Casey Rowan},
+  note = {Under review},
+  listingyear = {2026},
+  abstract = {When two nearby sensors begin to disagree, either instrument may have drifted or the surroundings may have changed. DriftMap combines neighboring time series with short periods in which instruments measure side by side. Each comparison records which changes can be attributed to a device and which remain ambiguous until another instrument visits.},
+  public = {wp}
+}
+
+@article{shadegrid,
+  title = {{ShadeGrid}: Mapping Shade Along Walking Routes},
+  author = {Rowan, Casey and Vale, Morgan},
+  journal = {Urban Field Methods},
+  year = {2025},
+  volume = {3},
+  pages = {12--23},
+  abstract = {Shade can move from one side of a street to the other during a single walk. ShadeGrid combines a solar path with outlines of tree crowns and buildings to estimate when each segment of a walking route enters or leaves shade. Route summaries preserve long uninterrupted stretches of sun that a single percentage of shade would conceal.},
+  public = {yes}
+}
+
+@inproceedings{curbclock,
+  title = {{CurbClock}: Timing Observations at a Shared Street Corner},
+  author = {Finch, Arden and Rowan, Casey},
+  booktitle = {Corner Notes Forum},
+  year = {2024},
+  pages = {3--7},
+  abstract = {A field team can return to the same street corner on several days and still miss its busiest half hour. CurbClock compares sampling schedules with a continuous reference count and shows which parts of a day a schedule leaves unobserved. The resulting coverage diagram helps field teams plan their next visit.},
+  public = {yes}
+}

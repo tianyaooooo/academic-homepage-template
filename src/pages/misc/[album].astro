@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { hobbyAlbums, type HobbyAlbum } from "../../data/hobby-albums";
+
+export function getStaticPaths() {
+  return hobbyAlbums.map(album => ({ params: { album: album.slug }, props: { album } }));
+}
+
+const { album } = Astro.props as { album: HobbyAlbum };
+---
+
+<Layout title={album.title} description={album.description} image={album.cover.src}>
+  <div class="page-stack">
+    <header class="page-header space-y-3">
+      <a class="action-link w-fit px-0" href="/misc/">
+        <span class="i-mdi:arrow-left" aria-hidden="true"></span>All albums
+      </a>
+      <h1 class="page-title">{album.title}</h1>
+      {album.description && <p class="body-copy">{album.description}</p>}
+    </header>
+    <div class="album-photos">
+      {album.photos.map(({ src, alt }, index) => (
+        <a href={src.src} style={`--aspect: ${src.width / src.height}`}>
+          <Image src={src} alt={alt} format="webp" quality={84}
+            widths={[...new Set([320, 640, 960, 1280].map(width => Math.min(width, src.width)))]}
+            sizes="(max-width: 40rem) calc(100vw - 2rem), 60vw"
+            loading={index === 0 ? "eager" : "lazy"} decoding="async" />
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .album-photos { display: grid; gap: 1rem; }
+  .album-photos a { display: block; min-width: 0; cursor: zoom-in; border-radius: .45rem; }
+  .album-photos img { display: block; width: 100%; height: auto; border-radius: inherit; }
+  .album-photos a:only-child { max-width: min(100%, 47rem, calc(var(--aspect) * 65vh)); }
+  @media (min-width: 40rem) {
+    .album-photos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); align-items: start; }
+  }
+</style>

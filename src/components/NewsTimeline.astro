@@ -1,0 +1,60 @@
+---
+import NewsList, { type NewsItem } from "./NewsList.astro";
+
+interface Props {
+  entries: readonly NewsItem[];
+}
+
+const recentCount = 5;
+const items = [...Astro.props.entries].sort((a, b) => b.date.localeCompare(a.date));
+const recent = items.slice(0, recentCount);
+const older = items.slice(recentCount);
+---
+
+{recent.length > 0 && (
+  <section id="news" aria-labelledby="news-heading">
+    <h2 id="news-heading" class="section-heading">News</h2>
+    <NewsList entries={recent} />
+    {older.length > 0 && (
+      <details class="older-news">
+        <summary class="text-accent-700 dark:text-accent-300">
+          <span class="show-label">Show older news</span>
+          <span class="hide-label">Hide older news</span>
+        </summary>
+        <NewsList entries={older} start={recentCount + 1} />
+      </details>
+    )}
+  </section>
+)}
+
+<style>
+  .older-news { margin-block-start: 0.65rem; }
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: fit-content;
+    min-height: 2.75rem;
+    padding-inline: 0.2rem;
+    list-style: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+  }
+  details[open] > summary::before { transform: rotate(45deg); }
+  summary:hover span { text-decoration: underline; text-underline-offset: 0.18em; }
+  .hide-label, details[open] .show-label { display: none; }
+  details[open] .hide-label { display: inline; }
+  @media (min-width: 640px) {
+    #news { --news-date-width: 4.75rem; --news-rail: calc(var(--news-date-width) + 0.85rem); }
+    summary { margin-inline-start: calc(var(--news-rail) - 0.35rem); }
+  }
+</style>

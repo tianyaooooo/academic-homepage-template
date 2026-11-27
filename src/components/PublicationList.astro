@@ -1,0 +1,253 @@
+---
+import { Image } from "astro:assets";
+import type { publicationFigures } from "../data/publication-figures";
+import siteConfig from "../side.config";
+import { publicationVenueGroup } from "../lib/papers";
+import type { BibEntry } from "../lib/bibtex";
+
+interface Props {
+  papers: BibEntry[];
+  figures?: typeof publicationFigures;
+}
+
+const { papers, figures } = Astro.props;
+const dialogId = `citation-dialog-${papers[0]?.id ?? "empty"}`;
+---
+
+<div data-publication-citations>
+  <ol
+    data-publication-list
+    class="m-0 list-none overflow-hidden rounded-xl border border-paper-300/90 bg-white/70 p-0 divide-y divide-paper-300/90 shadow-paper dark:border-ink-700 dark:bg-ink-900/65 dark:divide-ink-700"
+  >
+    {papers.map((paper) => {
+      const showYear = paper.venue !== "Under review" && paper.year && paper.listingYear && paper.listingYear !== paper.year
+        && !/\b\d{4}\b/.test(paper.venue ?? "");
+      const figure = figures && Object.hasOwn(figures, paper.id) ? figures[paper.id] : undefined;
+
+      return (
+        <li data-venue-group={publicationVenueGroup(paper.venue)}>
+          <article id={paper.id} data-paper-id={paper.id} class:list={[
+            "grid min-w-0 grid-cols-1 gap-3 px-4 py-4.5 transition-colors duration-200 hover:bg-accent-50/50 dark:hover:bg-accent-950/20 sm:px-6 sm:py-5",
+            figure && "md:grid-cols-[12rem_minmax(0,1fr)] md:gap-6"
+          ]}>
+            {figure && (
+              <figure class="m-0 min-w-0 max-w-60 md:max-w-full">
+                <a href={figure.image.src} target="_blank" rel="noopener" class="flex h-32 items-center justify-center rounded-md border border-paper-300/80 bg-white p-1 dark:border-ink-700 sm:h-36"
+                  aria-label={`Enlarge illustration for ${paper.title} (opens in a new tab)`}>
+                  <Image
+                    src={figure.image}
+                    alt={figure.alt}
+                    widths={[...new Set([192, 384, 576].map(width => Math.min(width, figure.image.width)))]}
+                    sizes="(min-width: 768px) 192px, (max-width: 320px) 75vw, 240px"
+                    loading="lazy"
+                    decoding="async"
+                    class="block h-full w-full object-contain"
+                  />
+                </a>
+                <figcaption class="mt-1.5 text-xs leading-snug text-ink-600 dark:text-paper-400">
+                  {figure.credit ? (
+                    <details>
+                      <summary class="w-fit cursor-pointer">Paper figure</summary>
+                      <p class="mt-1">{figure.credit} {figure.source && <a href={figure.source} class="underline">Source</a>}
+                        {figure.license && <> · <a href={figure.license} class="underline">License</a></>}
+                      </p>
+                    </details>
+                  ) : "Concept illustration"}
+                </figcaption>
+              </figure>
+            )}
+            <div class="min-w-0 space-y-2.5">
+              {paper.venue && (
+                <p class="w-fit max-w-full rounded-md bg-accent-50 px-2 py-1 text-xs font-semibold leading-tight text-accent-800 dark:bg-accent-950/60 dark:text-accent-200" data-publication-venue>
+                  {paper.venue}{showYear && <> <time datetime={String(paper.year)}>{paper.year}</time></>}
+                </p>
+              )}
+              <div class="space-y-1">
+                <h3 class="entry-title text-[1.1875rem]">
+                  {paper.url ? (
+                    <a
+                      href={paper.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline text-inherit no-underline transition-colors hover:text-accent-700 focus-visible:text-accent-700 dark:hover:text-accent-300 dark:focus-visible:text-accent-300"
+                    >
+                      <span>{paper.title}</span>
+                      <span
+                        class="i-mdi:open-in-new ml-1 inline-block align-[0.05em] text-xs text-accent-600 dark:text-accent-300"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="sr-only"> opens in a new tab</span>
+                    </a>
+                  ) : paper.title}
+                </h3>
+
+                {paper.authors.length > 0 && (
+                  <p class="entry-supporting text-sm">{paper.authors.map((name, index) => {
+                    const displayName = name === paper.starredAuthor ? `${name}*` : name;
+                    return <>{index > 0 && ", "}{name === siteConfig.author
+                      ? <strong class="font-bold text-ink-950 dark:text-paper-50">{displayName}</strong>
+                      : displayName}</>;
+                  })}</p>
+                )}
+              </div>
+
+              <div class="flow-root pt-0.5">
+                <div class="float-left mr-1.5 flex flex-wrap items-center gap-1.5">
+                  {paper.url && (
+                    <a
+                      href={paper.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="publication-control action-link glass-control min-h-9 px-2.5 text-xs font-semibold leading-none"
+                    >
+                      <span class="i-mdi:file-document !text-sm" aria-hidden="true"></span>
+                      <span>Paper</span>
+                      <span class="sr-only"> for {paper.title}, opens in a new tab</span>
+                    </a>
+                  )}
+
+                  <button
+                    type="button"
+                    class="publication-control action-link glass-control min-h-9 cursor-pointer px-2.5 text-xs font-semibold leading-none"
+                    data-citation-trigger
+                    data-bibtex={paper.citation}
+                    aria-label={`Cite ${paper.title}`}
+                    aria-haspopup="dialog"
+                    aria-controls={dialogId}
+                  >
+                    <span class="i-mdi:content-copy !text-sm" aria-hidden="true"></span>
+                    <span>Cite</span>
+                  </button>
+                </div>
+
+                {paper.abstract && (
+                  <details class="group min-w-0" data-publication-abstract>
+                    <summary class="publication-control action-link glass-control min-h-9 cursor-pointer list-none px-2.5 text-xs font-semibold leading-none">
+                      <span
+                        class="i-mdi:chevron-down !text-sm transition-transform duration-200 group-open:rotate-180"
+                        aria-hidden="true"
+                      ></span>
+                      Abstract
+                    </summary>
+                    <div class="body-copy clear-both mt-3 space-y-2 border-l-2 border-accent-300/80 py-1 pl-4 text-sm leading-relaxed dark:border-accent-700/80">
+                      {(paper.abstractParagraphs ?? paper.abstract.split("\n\n").map(text => [text])).map(parts => (
+                        <p>{parts.map(part => {
+                          if (typeof part === "string") return part;
+                          const Tag = part.tag;
+                          return <Tag>{part.text}</Tag>;
+                        })}</p>
+                      ))}
+                      {(paper.abstractSource || paper.url) && (
+                        <a href={paper.abstractSource || paper.url} class="inline-block text-accent-700 underline dark:text-accent-300">
+                          Source
+                        </a>
+                      )}
+                    </div>
+                  </details>
+                )}
+              </div>
+            </div>
+          </article>
+        </li>
+      );
+    })}
+  </ol>
+
+  <dialog
+    id={dialogId}
+    aria-labelledby={`${dialogId}-title`}
+    data-citation-dialog
+    class="citation-dialog m-auto w-[min(48rem,calc(100%-2rem))] border-0 bg-transparent p-0 text-ink-900 dark:text-paper-100"
+  >
+    <div class="glass-popover max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-xl border border-paper-300/90 p-5 dark:border-ink-700 sm:p-6">
+      <header class="flex items-center justify-between gap-4">
+        <h3 id={`${dialogId}-title`} class="section-heading text-[1.5rem]">BibTeX</h3>
+        <form method="dialog">
+          <button type="submit" class="icon-button" aria-label="Close citation window">
+            <span class="i-ph-x-bold text-base" aria-hidden="true"></span>
+          </button>
+        </form>
+      </header>
+
+      <pre tabindex="-1" class="my-4 max-h-[50dvh] overflow-auto whitespace-pre-wrap break-words rounded-lg border border-paper-300/90 bg-paper-100/70 p-4 font-mono text-[0.8125rem] leading-6 text-ink-800 dark:border-ink-700 dark:bg-ink-950/55 dark:text-paper-200"><code data-citation-output></code></pre>
+
+      <div class="flex items-center justify-end gap-3">
+        <p data-copy-status role="status" class="text-xs text-ink-600 dark:text-paper-300"></p>
+        <button type="button" data-copy-citation class="glass-control glass-active inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-2 px-4 text-sm font-semibold text-accent-900 dark:text-accent-100">
+          <span class="i-mdi:content-copy text-base" aria-hidden="true"></span>
+          Copy
+        </button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  article:target {
+    background-color: var(--glass-active);
+  }
+
+  .publication-control {
+    appearance: none;
+    border: 1px solid var(--glass-control-border);
+    background: var(--glass-control);
+  }
+
+  .citation-dialog::backdrop {
+    background: rgb(22 25 24 / 0.58);
+  }
+</style>
+
+<script>
+  function setupCitationDialogs() {
+    document.querySelectorAll<HTMLElement>("[data-publication-citations]").forEach((container) => {
+      if (container.dataset.citationBound) return;
+      const dialog = container.querySelector<HTMLDialogElement>("[data-citation-dialog]");
+      const output = dialog?.querySelector<HTMLElement>("[data-citation-output]");
+      const status = dialog?.querySelector<HTMLElement>("[data-copy-status]");
+      const copyButton = dialog?.querySelector<HTMLButtonElement>("[data-copy-citation]");
+      if (!dialog || !output || !status || !copyButton) return;
+      container.dataset.citationBound = "true";
+
+      let lastTrigger: HTMLButtonElement | null = null;
+      let session = 0;
+
+      container.querySelectorAll<HTMLButtonElement>("[data-citation-trigger]").forEach((button) => {
+        button.addEventListener("click", () => {
+          lastTrigger = button;
+          session++;
+          output.textContent = button.dataset.bibtex ?? "";
+          status.textContent = "";
+          dialog.showModal();
+          copyButton.focus();
+        });
+      });
+
+      copyButton.addEventListener("click", async () => {
+        const current = session;
+        try {
+          await navigator.clipboard.writeText(output.textContent ?? "");
+          if (dialog.open && session === current) status.textContent = "Copied.";
+        } catch {
+          if (!dialog.open || session !== current) return;
+          output.parentElement?.focus();
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(output);
+          selection?.removeAllRanges();
+          selection?.addRange(range);
+          status.textContent = "Copy unavailable. Use your device’s copy command.";
+        }
+      });
+
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      dialog.addEventListener("close", () => {
+        lastTrigger?.focus();
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupCitationDialogs);
+</script>

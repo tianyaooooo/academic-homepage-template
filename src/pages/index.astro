@@ -1,0 +1,217 @@
+---
+import { Image } from "astro:assets";
+import InlineText from "../components/InlineText.astro";
+import FigureViewer from "../components/FigureViewer.astro";
+import NewsTimeline from "../components/NewsTimeline.astro";
+import ProfileSections from "../components/ProfileSections.astro";
+import { home } from "../data/home";
+import { selectedHonors } from "../data/honors";
+import { getAllPapers } from "../lib/papers";
+import Layout from "../layouts/Layout.astro";
+import siteConfig from "../side.config";
+
+function figureWidths(width: number): number[] {
+  return [...[360, 720].filter((size) => size < width), width];
+}
+
+const portrait = siteConfig.hero;
+const papers = new Map(getAllPapers().map((paper) => [paper.id, paper]));
+const featured = home.selectedPublications.map((selection) => {
+  const paper = papers.get(selection.paper);
+  if (!paper) throw new Error(`Unknown featured publication "${selection.paper}". Check its BibTeX key.`);
+  const title = selection.name && paper.title.startsWith(`${selection.name}: `)
+    ? paper.title.slice(selection.name.length + 2)
+    : paper.title;
+  return { ...selection, title, venue: paper.venue, year: paper.year ?? paper.listingYear };
+});
+---
+
+<Layout
+  title={[siteConfig.author, portrait.subheadline].filter(Boolean).join(" | ")}
+  description={siteConfig.description || portrait.subheadline}
+  image={portrait.profileImage || undefined}
+  imageAlt={portrait.profileAlt}
+  imageWidth={portrait.profileImageWidth}
+  imageHeight={portrait.profileImageHeight}
+  schemaType="ProfilePage"
+>
+  <div class="home-page">
+    <section class:list={["intro", { "intro--no-portrait": !portrait.profileImage }]} aria-labelledby="name">
+      <div class="name font-heading font-semibold text-ink-950 dark:text-paper-50">
+        <h1 id="name">{siteConfig.author}</h1>{portrait.headline && <> <span class="alternate-name" data-nosnippet>{portrait.headline}</span></>}
+      </div>
+      {portrait.subheadline && <p class="position font-semibold text-ink-700 dark:text-paper-200">{portrait.subheadline}</p>}
+      {portrait.profileImage && (
+        <img src={portrait.profileImage} alt={portrait.profileAlt} class="portrait"
+             width={portrait.profileImageWidth} height={portrait.profileImageHeight}
+             loading="eager" fetchpriority="high" />
+      )}
+      <div class="introduction">
+        <p class="text-ink-700 dark:text-paper-300"><InlineText parts={home.background} /></p>
+        <div class="contact flex flex-wrap items-center gap-x-6">
+          {home.email && <a href={`mailto:${home.email}`} class="contact-link text-accent-700 dark:text-accent-300">
+            <span class="i-ph-envelope-simple" aria-hidden="true"></span>Email
+          </a>}
+          {siteConfig.socialLinks.map((link) => (
+            <a href={link.href} class="contact-link text-accent-700 dark:text-accent-300">
+              {link.icon && <span class={link.icon} aria-hidden="true"></span>}{link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <div id="research-interests" class="mt-9 sm:mt-11">
+      <ProfileSections>
+        <NewsTimeline entries={home.news} />
+        {featured.length > 0 && (
+          <section id="selected-publications" aria-labelledby="selected-publications-heading" class="scroll-mt-24 space-y-4">
+            <h2 id="selected-publications-heading" class="section-heading">Selected Publications</h2>
+            <ul class="featured-list">
+              {featured.map((paper) => (
+                <li class:list={["featured-paper", { "featured-paper--short": paper.summary.length === 1 }]}>
+                  <h3 class="featured-title font-heading text-ink-900 dark:text-paper-100">
+                    {(paper.venue || paper.year) && <span class="featured-venue font-sans bg-accent-50 text-accent-800 dark:bg-accent-950 dark:text-accent-300">{[paper.venue, paper.year].filter(Boolean).join(" ")}</span>}{" "}
+                    <a href={`/publications/#${paper.paper}`}>
+                      {paper.name && <strong class="text-accent-700 dark:text-accent-300">{paper.name}</strong>}
+                      {paper.name === paper.title ? "" : (paper.name ? ": " : "") + paper.title}
+                    </a>
+                  </h3>
+                  <div class="featured-summary text-ink-700 dark:text-paper-300">
+                    {paper.figure && (
+                      <figure class="featured-figure">
+                        <a class="figure-zoom rounded-md border border-paper-300 bg-white dark:border-ink-600"
+                           href={paper.figure.image.src} aria-label={`Open the full-size figure for ${paper.name ?? paper.title}`}
+                           data-figure-dialog={paper.figure.useViewer ? `figure-${paper.paper}` : undefined}
+                           aria-description={paper.figure.credit}>
+                          <Image src={paper.figure.image} alt={paper.figure.alt} loading="lazy" quality={95}
+                                 widths={figureWidths(paper.figure.image.width)}
+                                 sizes="auto, (min-width: 640px) min(29vw, 276px), min(100vw, 384px)" />
+                        </a>
+                      </figure>
+                    )}
+                    {paper.summary.map((paragraph) => <p><InlineText parts={paragraph} /></p>)}
+                  </div>
+                  {paper.figure?.useViewer && <FigureViewer id={`figure-${paper.paper}`} name={paper.name ?? paper.title} figure={paper.figure} />}
+                </li>
+              ))}
+            </ul>
+            <a class="inline-block text-sm font-medium text-accent-700 underline underline-offset-3 dark:text-accent-300" href="/publications/">All publications <span aria-hidden="true">→</span></a>
+          </section>
+        )}
+        {selectedHonors.length > 0 && <section id="selected-awards" aria-labelledby="awards-heading" class="scroll-mt-24 space-y-4">
+          <h2 id="awards-heading" class="section-heading">Selected Honors &amp; Awards</h2>
+          <ul class="list-disc space-y-2 pl-5 text-base leading-relaxed text-ink-700 marker:text-accent-600 dark:text-paper-300 dark:marker:text-accent-300 sm:text-lg">
+            {selectedHonors.map((award) => (
+              <li>
+                {award.name}{award.note && <span lang={award.noteLang}> ({award.note})</span>}
+              </li>
+            ))}
+          </ul>
+          <a class="inline-block text-sm font-medium text-accent-700 underline underline-offset-3 dark:text-accent-300" href="/cv/#honors-awards">All honors &amp; awards <span aria-hidden="true">→</span></a>
+        </section>}
+        <section id="connect-internships" aria-labelledby="connect-heading" class="scroll-mt-24 space-y-4">
+          <h2 id="connect-heading" class="section-heading">Connect &amp; Internships</h2>
+          <div class="space-y-2 text-base leading-relaxed text-ink-700 dark:text-paper-300 sm:text-lg">
+            <p>{home.connect.collaborations}</p>
+            <p>{home.connect.internships}</p>
+          </div>
+        </section>
+      </ProfileSections>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .home-page { padding-block: clamp(0.6rem, 2.4vw, 1.85rem) 0.75rem; }
+  .featured-list { list-style: none; padding: 0; }
+  .featured-paper { padding-block: 1.25rem; }
+  .featured-paper + .featured-paper { border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+  .featured-title { margin: 0; font-size: clamp(1.25rem, 2vw, 1.55rem); line-height: 1.2; font-weight: 500; }
+  .featured-title a { color: inherit; text-decoration: none; }
+  .featured-title a:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 0.14em; }
+  .featured-title strong { font-weight: 700; }
+  .featured-venue {
+    display: inline-block;
+    margin-inline-end: 0.55rem;
+    padding: 0.14rem 0.4rem;
+    border-radius: 0.22rem;
+    vertical-align: 0.15em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+  .featured-summary { display: flow-root; margin-top: 0.65rem; font-size: 1.125rem; line-height: 1.55; }
+  .featured-summary p { margin: 0.55rem 0 0; }
+  .featured-summary p:first-of-type { margin-top: 0; }
+  .featured-figure { float: left; width: min(29%, 17.25rem); margin: 0.15rem 1.5rem 0.45rem 0; }
+  .featured-paper--short .featured-figure { width: min(24%, 13.25rem); }
+  .figure-zoom { display: block; padding: 0.45rem; cursor: zoom-in; }
+  .figure-zoom img { display: block; width: 100%; height: auto; object-fit: contain; }
+  @media (max-width: 639px) {
+    .featured-paper { padding-block: 1rem; }
+    .featured-summary { display: flex; flex-direction: column; font-size: 1rem; }
+    .featured-summary p:first-of-type { order: -1; }
+    .featured-figure, .featured-paper--short .featured-figure {
+      float: none; width: 100%; max-width: 24rem; margin: 0.8rem auto 0.15rem;
+    }
+  }
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name portrait" "position position" "bio bio";
+    align-items: center;
+    column-gap: 1rem;
+  }
+  .name {
+    grid-area: name;
+    font-size: clamp(3rem, 6.1vw, 4.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+  }
+  .name h1 { display: inline; font: inherit; }
+  .alternate-name {
+    display: inline-block;
+    margin-inline-start: 0.14em;
+    font-size: 0.44em;
+    font-weight: 500;
+    letter-spacing: 0.035em;
+    white-space: nowrap;
+  }
+  .position { grid-area: position; font-size: 1.08rem; line-height: 1.4; margin-top: 0.8rem; }
+  .portrait {
+    grid-area: portrait;
+    justify-self: end;
+    display: block;
+    width: clamp(5.25rem, 24vw, 6.75rem);
+    height: auto;
+    border-radius: 0.45rem;
+  }
+  .introduction { grid-area: bio; margin-top: 0.9rem; }
+  .introduction > p { font-size: 1.065rem; line-height: 1.65; max-width: 75ch; }
+  .contact { margin-top: 0.45rem; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.75rem; font-weight: 700; text-decoration: underline; text-underline-offset: 0.19em; text-decoration-thickness: 1px; }
+  .contact-link:hover { text-decoration-thickness: 2px; }
+  .contact-link span { width: 1.1em; height: 1.1em; }
+  @media (max-width: 430px) {
+    .alternate-name { display: block; margin: 0.35em 0 0 0.12em; }
+  }
+  @media (min-width: 760px) {
+    .intro {
+      grid-template-columns: minmax(0, 1fr) minmax(10rem, 14.875rem);
+      grid-template-areas: "name portrait" "position portrait" "bio portrait";
+      align-items: start;
+      align-content: start;
+      column-gap: clamp(2.25rem, 5.5vw, 5rem);
+    }
+    .portrait { width: 100%; }
+    .position { margin-top: 0.85rem; font-size: 1.18rem; }
+    .contact { margin-top: 0.65rem; }
+    .introduction > p { font-size: 1.125rem; }
+  }
+  .intro--no-portrait {
+    grid-template-columns: 1fr;
+    grid-template-areas: "name" "position" "bio";
+  }
+</style>

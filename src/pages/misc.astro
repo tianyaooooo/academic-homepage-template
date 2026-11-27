@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { hobbyAlbums, hobbyIntroduction } from "../data/hobby-albums";
+---
+
+<Layout title="Misc" description={hobbyIntroduction}>
+  <div class="page-stack">
+    <header class="page-header">
+      <h1 class="page-title">Misc</h1>
+    </header>
+    <section id="hobbies" aria-labelledby="hobbies-heading" class="content-section space-y-3">
+      <h2 id="hobbies-heading" class="section-heading">Hobbies</h2>
+      {hobbyIntroduction && <p class="body-copy">{hobbyIntroduction}</p>}
+      <ul class="album-list">
+        {hobbyAlbums.map(({ slug, title, cover, coverPosition, photos }) => (
+          <li>
+            <a class="album" href={`/misc/${slug}/`}>
+              <Image src={cover} alt="" width={240} height={240} fit="cover" position={coverPosition ?? "center"}
+                format="webp" quality={84} loading="lazy" decoding="async" class="album-cover" />
+              <span>
+                <span class="album-title font-heading font-semibold text-ink-950 dark:text-paper-50">{title}</span>
+                <span class="album-count text-ink-600 dark:text-paper-400">{photos.length} {photos.length === 1 ? "image" : "images"}</span>
+              </span>
+              <span class="i-mdi:chevron-right ml-auto text-ink-600 dark:text-paper-400" aria-hidden="true"></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .album-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; column-gap: clamp(2rem, 5vw, 4rem); }
+  .album-list li { min-width: 0; border-top: 1px solid var(--glass-control-border); }
+  .album { display: flex; align-items: center; gap: 1.1rem; padding: .9rem .4rem .9rem 0; text-decoration: none; }
+  .album-cover { width: clamp(4.75rem, 8vw, 6.5rem); height: auto; aspect-ratio: 1; border-radius: .45rem; flex: none; }
+  .album-title, .album-count { display: block; }
+  .album-title { font-size: 1.4rem; line-height: 1.2; }
+  .album-count { font-size: .88rem; margin-top: .25rem; }
+  .album:is(:hover, :focus-visible) .album-title { text-decoration: underline; text-underline-offset: .18em; }
+  @media (min-width: 48rem) {
+    .album-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>

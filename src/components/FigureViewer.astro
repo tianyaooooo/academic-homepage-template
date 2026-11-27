@@ -1,0 +1,57 @@
+---
+import type { PublicationFigure } from "../data/selected-publication-figures";
+
+interface Props {
+  id: string;
+  name: string;
+  figure: PublicationFigure;
+}
+
+const { id, name, figure } = Astro.props;
+---
+
+<dialog id={id} class="figure-viewer rounded-lg border border-paper-300 bg-white text-ink-900" aria-labelledby={`${id}-title`}>
+  <header>
+    <strong id={`${id}-title`}>{name} figure</strong>
+    <form method="dialog"><button class="close-figure text-accent-700" type="submit">Close</button></form>
+  </header>
+  <div class="figure-scroll" tabindex="0" role="region" aria-label={`Full-size ${name} figure`}>
+    <img alt={figure.alt} width={figure.image.width} height={figure.image.height} />
+  </div>
+  <small class="scroll-hint">Scroll to explore the figure.</small>
+</dialog>
+
+<script>
+  for (const link of document.querySelectorAll<HTMLAnchorElement>("a[data-figure-dialog]")) {
+    const dialog = document.getElementById(link.dataset.figureDialog ?? "");
+    if (!(dialog instanceof HTMLDialogElement) || typeof dialog.showModal !== "function") continue;
+    const viewport = dialog.querySelector<HTMLElement>(".figure-scroll");
+    const image = dialog.querySelector("img");
+    if (!viewport || !image) continue;
+
+    link.setAttribute("aria-haspopup", "dialog");
+    link.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      if (!image.hasAttribute("src")) image.src = link.href;
+      dialog.showModal();
+      viewport.scrollTo(0, 0);
+      viewport.focus({ preventScroll: true });
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  }
+</script>
+
+<style>
+  .figure-viewer { position: fixed; inset: 0; width: min(96vw, 96rem); max-width: 100%; max-height: 92dvh; padding: 0; margin: auto; overflow: hidden; }
+  .figure-viewer[open] { display: flex; flex-direction: column; }
+  .figure-viewer::backdrop { background: rgb(13 21 25 / 65%); }
+  .figure-viewer header { display: flex; align-items: center; justify-content: space-between; padding: .45rem 1rem; }
+  .close-figure { min-height: 2.75rem; padding-inline: .5rem; font-weight: 600; cursor: pointer; }
+  .figure-scroll { min-height: 0; overflow: auto; overscroll-behavior: contain; }
+  .figure-scroll img { display: block; width: max(100%, 82rem); max-width: none; height: auto; }
+  .scroll-hint { padding: .4rem 1rem; color: #49575c; }
+  @media (min-width: 86rem) { .scroll-hint { display: none; } }
+</style>

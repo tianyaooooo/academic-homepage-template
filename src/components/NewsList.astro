@@ -1,0 +1,87 @@
+---
+export type NewsItem = {
+  date: string;
+  before: string;
+  link?: { href: string; text: string };
+  after?: string;
+};
+
+interface Props {
+  entries: readonly NewsItem[];
+  start?: number;
+}
+
+const { entries, start } = Astro.props;
+
+const monthYear = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+---
+
+<ol role="list" class="timeline" start={start}>
+  {entries.map((item) => (
+    <li>
+      <time datetime={item.date.slice(0, 7)} class="text-ink-600 dark:text-paper-400">
+        {item.date.length === 4 ? item.date : monthYear.format(new Date(item.date))}
+      </time>
+      <p class="event text-ink-700 dark:text-paper-300">{item.before}{item.link && <a href={item.link.href} class="text-accent-700 dark:text-accent-300">{item.link.text}</a>}{item.after}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .timeline {
+    --rail: 0.3rem;
+    --text-inset: 1.55rem;
+    margin-top: 1.2rem;
+    list-style: none;
+    padding: 0;
+  }
+  .timeline li {
+    position: relative;
+    padding-inline-start: var(--text-inset);
+    padding-bottom: 1.35rem;
+    display: grid;
+    gap: 0.18rem;
+    align-items: baseline;
+  }
+  .timeline li::before, .timeline li::after {
+    position: absolute;
+    left: var(--rail);
+    content: "";
+  }
+  .timeline li:not(:last-child)::before {
+    top: 0.63rem;
+    bottom: -0.63rem;
+    width: 1px;
+    background: #b1c5ca;
+  }
+  :global(html.dark) .timeline li::before { background: #48616a; }
+  .timeline li::after {
+    top: 0.63rem;
+    transform: translate(-50%, -50%);
+    width: 0.46rem;
+    height: 0.46rem;
+    border-radius: 50%;
+    background: #497d90;
+  }
+  :global(html.dark) .timeline li::after { background: #96bdc9; }
+  .timeline li:last-child { padding-bottom: 0; }
+  time { font-size: 0.91rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  .event {
+    margin-inline-end: clamp(0.5rem, 2vw, 2rem);
+    font-size: 1.04rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .event a { text-decoration: underline; text-underline-offset: 0.19em; text-decoration-thickness: 1px; }
+  .event a:hover { text-decoration-thickness: 2px; }
+  @media (max-width: 399px) {
+    .event { text-wrap: balance; }
+  }
+  @media (min-width: 640px) {
+    .timeline { --rail: var(--news-rail); }
+    .timeline li { grid-template-columns: var(--news-date-width) minmax(0, 1fr); column-gap: 2rem; padding-inline-start: 0; }
+    .timeline li::after, .timeline li:not(:last-child)::before { top: 0.85rem; }
+    .timeline li:not(:last-child)::before { bottom: -0.85rem; }
+    .event { font-size: 1.085rem; }
+  }
+</style>

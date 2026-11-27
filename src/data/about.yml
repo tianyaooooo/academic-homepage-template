@@ -1,0 +1,22 @@
+profile:
+  - label: Urban Hydrology
+    question: Where does rain collect when it falls faster than a street can drain?
+    value: Curbside gauges · Storm timing · Street gradients
+    works:
+      - { paper: rainline, label: Rainline }
+  - label: Outdoor Heat
+    question: How much direct sun does a pedestrian encounter along a route?
+    value: Shade mapping · Walking surveys · Thermal exposure
+    works:
+      - { paper: shadegrid, label: ShadeGrid }
+  - label: Sensor Reliability
+    question: How can a field team tell a faulty reading from a local change?
+    value: Instrument drift · Co-location · Reference measurements
+    works:
+      - { paper: driftmap, label: DriftMap }
+  - label: Field Methods
+    question: Which trips back into the field will tell us the most?
+    value: Site selection · Repeat surveys · Field notebooks
+    works:
+      - { paper: rainline, label: Rainline }
+      - { paper: shadegrid, label: ShadeGrid }
