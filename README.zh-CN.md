@@ -1,12 +1,39 @@
 # 学术个人主页模板
 
-[在线演示](https://tianyaooooo.github.io/academic-homepage-template/) · [使用模板](https://github.com/tianyaooooo/academic-homepage-template/generate) · [English](README.md)
+**[English README](README.md)** · [在线演示](https://tianyaooooo.github.io/academic-homepage-template/) · [使用模板](https://github.com/tianyaooooo/academic-homepage-template/generate)
 
 这套 Astro 模板适合想在首页讲清代表工作、同时保留完整论文列表的研究者。演示人物陆清禾（Qinghe Lu）是一位研究城市环境的虚构学者。人物、机构、论文和研究结果均为虚构，头像由 AI 生成，论文配图和相册插画为模板原创。
 
-[![陆清禾的示例主页](docs/preview.png)](https://tianyaooooo.github.io/academic-homepage-template/)
+## 页面预览
 
-首页展示研究兴趣、图文代表作、荣誉和最近五条动态，较早的动态可展开。论文页可按年份或会议筛选、展开摘要、复制 BibTeX，并自动高亮作者本人。Experience 页展示工作、教学、学术服务和奖项；Misc 页按主题组织相册。
+点击截图可以放大，点击页面名称可以打开对应的在线演示。
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>首页</strong></a><br>
+      <a href="docs/preview.png"><img src="docs/preview.png" alt="陆清禾的虚拟头像与四项研究兴趣"></a><br>
+      研究兴趣、图文代表作和可展开的新闻时间线。
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>论文</strong></a><br>
+      <a href="docs/publications.png"><img src="docs/publications.png" alt="年份与会议筛选，以及展开的 Rainline 论文摘要"></a><br>
+      按年份或会议筛选，展开摘要或复制 BibTeX 引文。
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>经历</strong></a><br>
+      <a href="docs/experience.png"><img src="docs/experience.png" alt="经历页中的工作履历、研究经历和教学记录"></a><br>
+      集中展示工作履历、教学、学术服务和奖项。
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>杂项</strong></a><br>
+      <a href="docs/misc.png"><img src="docs/misc.png" alt="海岸漫步、随身速写和潮汐观察三个主题相册的封面"></a><br>
+      按主题浏览相册，点击封面查看同组图片。
+    </td>
+  </tr>
+</table>
 
 ## 本地运行
 

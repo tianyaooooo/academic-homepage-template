@@ -1,12 +1,39 @@
 # Academic Homepage Template
 
-[Live demo](https://tianyaooooo.github.io/academic-homepage-template/) · [Use this template](https://github.com/tianyaooooo/academic-homepage-template/generate) · [简体中文](README.zh-CN.md)
+**[中文 README](README.zh-CN.md)** · [Live demo](https://tianyaooooo.github.io/academic-homepage-template/) · [Use this template](https://github.com/tianyaooooo/academic-homepage-template/generate)
 
 An Astro portfolio for researchers who want to feature a few papers on the homepage and keep a browsable bibliography alongside it. The demo follows Qinghe Lu (陆清禾), a fictional urban field scientist. Its people, institutions, publications, and results are fictional. The profile portrait is AI-generated, and the paper figures and album illustrations were made for this template.
 
-[![Homepage with Qinghe Lu’s profile and research interests](docs/preview.png)](https://tianyaooooo.github.io/academic-homepage-template/)
+## Page previews
 
-**Home** pairs research interests with representative papers, shows five recent news items, and features illustrated research summaries. **Publications** supports year or venue filters, expandable abstracts, author highlighting, and copyable BibTeX. **Experience** groups appointments, teaching, service, and honors. **Misc** opens illustrated albums by theme. All four pages support mobile screens and dark mode.
+Click a screenshot to enlarge it, or a page name to open the live demo.
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>Home</strong></a><br>
+      <a href="docs/preview.png"><img src="docs/preview.png" alt="Qinghe Lu’s portrait and four research interests"></a><br>
+      Profile, research interests, selected papers, and a collapsible news timeline.
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>Publications</strong></a><br>
+      <a href="docs/publications.png"><img src="docs/publications.png" alt="Year and venue filters with the Rainline abstract expanded"></a><br>
+      Filter by year or venue, expand an abstract, or copy a BibTeX citation.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>Experience</strong></a><br>
+      <a href="docs/experience.png"><img src="docs/experience.png" alt="Professional appointments and academic teaching on the Experience page"></a><br>
+      Appointments, teaching, academic service, and honors.
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>Misc</strong></a><br>
+      <a href="docs/misc.png"><img src="docs/misc.png" alt="Three illustrated album covers for shore walks, sketchbooks, and tides"></a><br>
+      Browse illustrated albums by theme.
+    </td>
+  </tr>
+</table>
 
 ## Start locally
 
