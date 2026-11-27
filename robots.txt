@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tianyaooooo.github.io/academic-homepage-template/sitemap-index.xml
