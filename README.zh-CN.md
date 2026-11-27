@@ -10,27 +10,17 @@
 
 <table>
   <tr>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>首页</strong></a><br>
-      <a href="docs/preview.png"><img src="docs/preview.png" alt="陆清禾的虚拟头像与四项研究兴趣"></a><br>
-      研究兴趣、图文代表作和可展开的新闻时间线。
+    <td width="58%" valign="top">
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>首页</strong></a><br>
+      <a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="陆清禾的完整首页，从头像和研究兴趣，到动态、代表作、荣誉、联系信息和页脚。" width="100%"></a></p>
     </td>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>论文</strong></a><br>
-      <a href="docs/publications.png"><img src="docs/publications.png" alt="年份与会议筛选，以及展开的 Rainline 论文摘要"></a><br>
-      按年份或会议筛选，展开摘要或复制 BibTeX 引文。
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>经历</strong></a><br>
-      <a href="docs/experience.png"><img src="docs/experience.png" alt="经历页中的工作履历、研究经历和教学记录"></a><br>
-      集中展示工作履历、教学、学术服务和奖项。
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>杂项</strong></a><br>
-      <a href="docs/misc.png"><img src="docs/misc.png" alt="海岸漫步、随身速写和潮汐观察三个主题相册的封面"></a><br>
-      按主题浏览相册，点击封面查看同组图片。
+    <td width="42%" valign="top">
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>论文</strong></a><br>
+      <a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="按年份排列的完整论文列表，顶部可按年份或会议筛选，第一篇 Rainline 的摘要已展开。" width="100%"></a></p>
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>经历</strong></a><br>
+      <a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="完整经历页，包含工作履历、研究与教学、学术服务和荣誉。" width="100%"></a></p>
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>杂项</strong></a><br>
+      <a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="海岸漫步、随身速写和潮汐观察三个主题相册的封面。" width="100%"></a></p>
     </td>
   </tr>
 </table>

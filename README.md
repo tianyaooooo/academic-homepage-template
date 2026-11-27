@@ -10,27 +10,17 @@ Click a screenshot to enlarge it, or a page name to open the live demo.
 
 <table>
   <tr>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>Home</strong></a><br>
-      <a href="docs/preview.png"><img src="docs/preview.png" alt="Qinghe Lu’s portrait and four research interests"></a><br>
-      Profile, research interests, selected papers, and a collapsible news timeline.
+    <td width="58%" valign="top">
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/"><strong>Home</strong></a><br>
+      <a href="docs/screenshots/home-full.png"><img src="docs/screenshots/home-full.png" alt="Qinghe Lu’s complete homepage, from her profile and research interests through selected papers, honors, and contact information." width="100%"></a></p>
     </td>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>Publications</strong></a><br>
-      <a href="docs/publications.png"><img src="docs/publications.png" alt="Year and venue filters with the Rainline abstract expanded"></a><br>
-      Filter by year or venue, expand an abstract, or copy a BibTeX citation.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>Experience</strong></a><br>
-      <a href="docs/experience.png"><img src="docs/experience.png" alt="Professional appointments and academic teaching on the Experience page"></a><br>
-      Appointments, teaching, academic service, and honors.
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>Misc</strong></a><br>
-      <a href="docs/misc.png"><img src="docs/misc.png" alt="Three illustrated album covers for shore walks, sketchbooks, and tides"></a><br>
-      Browse illustrated albums by theme.
+    <td width="42%" valign="top">
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/publications/"><strong>Publications</strong></a><br>
+      <a href="docs/screenshots/publications-full.png"><img src="docs/screenshots/publications-full.png" alt="The publication list from 2026 to 2024, with year and venue filters and the Rainline abstract expanded." width="100%"></a></p>
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/cv/"><strong>Experience</strong></a><br>
+      <a href="docs/screenshots/experience-full.png"><img src="docs/screenshots/experience-full.png" alt="Professional appointments, research and teaching, academic service, and honors." width="100%"></a></p>
+      <p><a href="https://tianyaooooo.github.io/academic-homepage-template/misc/"><strong>Misc</strong></a><br>
+      <a href="docs/screenshots/misc-full.png"><img src="docs/screenshots/misc-full.png" alt="Three illustrated album covers for shore walks, sketchbooks, and tides." width="100%"></a></p>
     </td>
   </tr>
 </table>
